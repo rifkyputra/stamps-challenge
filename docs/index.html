@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stamps Technical Challenge</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-subtle: #1f6feb22;
+      --green: #3fb950;
+      --orange: #d29922;
+      --tag-foo: #da3633;
+      --tag-bar: #1f6feb;
+      --tag-foobar: #8957e5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 3rem 0 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3rem;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin: 0.5rem 0.25rem 0;
+    }
+
+    .badge-ts { background: #3178c6; color: #fff; }
+    .badge-node { background: #339933; color: #fff; }
+
+    /* Sections */
+    .task {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .task h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .task-number {
+      background: var(--accent);
+      color: var(--bg);
+      width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .task h3 {
+      font-size: 1rem;
+      color: var(--accent);
+      margin: 1.5rem 0 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .task p, .task li {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .task ul {
+      padding-left: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .task li { margin-bottom: 0.3rem; }
+
+    /* Code blocks */
+    pre {
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      margin: 0.75rem 0;
+    }
+
+    pre code {
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    /* Output block */
+    .output {
+      background: #010409;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 1rem 1.25rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      overflow-x: auto;
+      margin: 0.75rem 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .output-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--green);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    /* Algorithm explanation */
+    .algo-box {
+      background: var(--accent-subtle);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 0.5rem 0.5rem 0;
+      padding: 1rem 1.25rem;
+      margin: 0.75rem 0;
+    }
+
+    .algo-box p {
+      color: var(--text) !important;
+      font-size: 0.9rem;
+    }
+
+    .algo-box strong {
+      color: var(--accent);
+    }
+
+    .complexity {
+      display: inline-block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.5rem;
+      border-radius: 0.25rem;
+      font-family: 'SF Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--green);
+    }
+
+    /* Weather table */
+    .weather-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0;
+      font-size: 0.9rem;
+    }
+
+    .weather-table th {
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+      border-bottom: 2px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .weather-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* FooBar output tokens */
+    .token { display: inline-block; margin: 0.15rem; padding: 0.1rem 0.4rem; border-radius: 0.25rem; font-size: 0.8rem; }
+    .token-foo { background: var(--tag-foo); color: #fff; }
+    .token-bar { background: var(--tag-bar); color: #fff; }
+    .token-foobar { background: var(--tag-foobar); color: #fff; }
+    .token-num { background: var(--border); color: var(--text); }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+      margin-top: 1rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .container { padding: 1rem; }
+      .task { padding: 1.25rem; }
+      header h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Stamps Technical Challenge</h1>
+      <p>Senior Developer Assessment</p>
+      <div>
+        <span class="badge badge-ts">TypeScript</span>
+        <span class="badge badge-node">Node.js</span>
+      </div>
+    </header>
+
+    <!-- Task 1 -->
+    <section class="task">
+      <h2><span class="task-number">1</span> FooBar — Number Printer</h2>
+      <p>Print numbers 1–100 in reverse order: skip primes, replace divisible-by-3 with Foo, divisible-by-5 with Bar, both with FooBar.</p>
+
+      <h3>Source Code</h3>
+      <pre><code class="language-typescript">/*
+ * Task 1: Print numbers 1-100 in reverse order with rules:
+ * - Skip prime numbers
+ * - Divisible by 3 → "Foo"
+ * - Divisible by 5 → "Bar"
+ * - Divisible by both 3 and 5 → "FooBar"
+ */
+
+// Uses Sieve of Eratosthenes for O(n log log n) prime generation
+// more efficient than brute force prime detection.
+function sieveOfEratosthenes(limit: number): Set&lt;number&gt; {
+  const isPrime = new Uint8Array(limit + 1).fill(1);
+  isPrime[0] = isPrime[1] = 0;
+
+  for (let i = 2; i * i &lt;= limit; i++) {
+    if (isPrime[i]) {
+      for (let j = i * i; j &lt;= limit; j += i) {
+        isPrime[j] = 0;
+      }
+    }
+  }
+
+  const primes = new Set&lt;number&gt;();
+  for (let i = 2; i &lt;= limit; i++) {
+    if (isPrime[i]) primes.add(i);
+  }
+  return primes;
+}
+
+function transform(n: number, primes: Set&lt;number&gt;): string | null {
+  if (primes.has(n)) return null;
+
+  const divisibleBy3 = n % 3 === 0;
+  const divisibleBy5 = n % 5 === 0;
+
+  if (divisibleBy3 &amp;&amp; divisibleBy5) return "FooBar";
+  if (divisibleBy3) return "Foo";
+  if (divisibleBy5) return "Bar";
+  return String(n);
+}
+
+function main(): void {
+  const primes = sieveOfEratosthenes(100);
+
+  const results: string[] = [];
+  for (let n = 100; n &gt;= 1; n--) {
+    const token = transform(n, primes);
+    if (token !== null) results.push(token);
+  }
+
+  console.log(results.join(" "));
+}
+
+main();</code></pre>
+
+      <h3>Output</h3>
+      <div class="output" id="task1-output"></div>
+
+      <h3>Algorithm Explanation</h3>
+      <div class="algo-box">
+        <p>
+          <strong>Sieve of Eratosthenes</strong> — Instead of testing each number individually for primality
+          (trial division at <span class="complexity">O(n&radic;n)</span>), we use the Sieve which marks all
+          composite numbers in a single pass at <span class="complexity">O(n log log n)</span>.
+        </p>
+        <br>
+        <p>
+          The sieve uses a <code>Uint8Array</code> (typed array) for cache-friendly memory access, then converts
+          results to a <code>Set</code> for O(1) prime lookups during the transform phase. The FooBar check evaluates
+          divisibility by 15 first (both 3 and 5) to avoid incorrect substitution.
+        </p>
+      </div>
+    </section>
+
+    <!-- Task 2 -->
+    <section class="task">
+      <h2><span class="task-number">2</span> Jakarta Weather Forecast — 5 Days</h2>
+      <p>Fetch and display Jakarta's 5-day weather forecast using the OpenWeatherMap free-tier API.</p>
+
+      <h3>Source Code</h3>
+      <pre><code class="language-typescript">/*
+ * Task 2: Display Jakarta weather forecast for the next 5 days.
+ * Uses OpenWeatherMap's free 5-day/3-hour forecast API
+ */
+
+const API_KEY = process.env.API_KEY;
+const CITY = "Jakarta";
+const BASE_URL = "https://api.openweathermap.org/data/2.5/forecast";
+
+interface ForecastEntry {
+  dt: number;
+  dt_txt: string;
+  main: {
+    temp: number;
+    temp_min: number;
+    temp_max: number;
+    humidity: number;
+  };
+  weather: { main: string; description: string }[];
+}
+
+interface ForecastResponse {
+  list: ForecastEntry[];
+  city: { name: string; country: string };
+}
+
+/** Group forecast entries by date string (YYYY-MM-DD). */
+function groupByDate(entries: ForecastEntry[]): Map&lt;string, ForecastEntry[]&gt; {
+  const grouped = new Map&lt;string, ForecastEntry[]&gt;();
+
+  for (const entry of entries) {
+    const date = entry.dt_txt.split(" ")[0];
+    if (!grouped.has(date)) grouped.set(date, []);
+    grouped.get(date)!.push(entry);
+  }
+
+  return grouped;
+}
+
+/** Compute the median of a numeric array — robust central tendency measure. */
+function median(values: number[]): number {
+  const sorted = [...values].sort((a, b) =&gt; a - b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 !== 0
+    ? sorted[mid]
+    : (sorted[mid - 1] + sorted[mid]) / 2;
+}
+
+/** Pick the most frequent weather description for the day. */
+function dominantWeather(entries: ForecastEntry[]): string {
+  const freq = new Map&lt;string, number&gt;();
+
+  for (const e of entries) {
+    const desc = e.weather[0].description;
+    freq.set(desc, (freq.get(desc) ?? 0) + 1);
+  }
+
+  return [...freq.entries()].reduce((a, b) =&gt; (b[1] &gt; a[1] ? b : a))[0];
+}
+
+async function main(): Promise&lt;void&gt; {
+  if (!API_KEY) {
+    console.error("Error: Please set API_KEY environment variable.");
+    console.error("Usage: API_KEY=your_key npx tsx task2.ts");
+    console.error("Get a free key at: https://openweathermap.org/api");
+    process.exit(1);
+  }
+
+  const url = `${BASE_URL}?q=${CITY}&amp;units=metric&amp;appid=${API_KEY}`;
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    const error = await response.text();
+    console.error(`API Error (${response.status}): ${error}`);
+    process.exit(1);
+  }
+
+  const data: ForecastResponse = await response.json();
+  const dailyGroups = groupByDate(data.list);
+
+  // Skip today (partial data), take next 5 days
+  const today = new Date().toISOString().split("T")[0];
+  const forecastDays = [...dailyGroups.entries()]
+    .filter(([date]) =&gt; date !== today)
+    .slice(0, 5);
+
+  console.log(`\n  Weather Forecast — ${data.city.name}, ${data.city.country}`);
+  console.log("  " + "═".repeat(48));
+  console.log(
+    `  ${"Date".padEnd(14)} ${"Temp (°C)".padEnd(12)} ${"Humidity".padEnd(10)} Condition`
+  );
+  console.log("  " + "─".repeat(48));
+
+  for (const [date, entries] of forecastDays) {
+    const temp = median(entries.map((e) =&gt; e.main.temp));
+    const humidity = Math.round(median(entries.map((e) =&gt; e.main.humidity)));
+    const weather = dominantWeather(entries);
+
+    const dateStr = new Date(date).toLocaleDateString("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+    });
+
+    console.log(
+      `  ${dateStr.padEnd(14)} ${temp.toFixed(1).padStart(5)}°C     ${String(humidity).padStart(3)}%      ${weather}`
+    );
+  }
+
+  console.log("  " + "═".repeat(48) + "\n");
+}
+
+main();</code></pre>
+
+      <h3>Sample Output</h3>
+      <table class="weather-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Temp (°C)</th>
+            <th>Humidity</th>
+            <th>Condition</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Wed, Mar 11</td><td>28.3°C</td><td>72%</td><td>overcast clouds</td></tr>
+          <tr><td>Thu, Mar 12</td><td>28.9°C</td><td>63%</td><td>clear sky</td></tr>
+          <tr><td>Fri, Mar 13</td><td>29.0°C</td><td>56%</td><td>few clouds</td></tr>
+          <tr><td>Sat, Mar 14</td><td>27.4°C</td><td>78%</td><td>overcast clouds</td></tr>
+          <tr><td>Sun, Mar 15</td><td>27.8°C</td><td>69%</td><td>overcast clouds</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Algorithm Explanation</h3>
+      <div class="algo-box">
+        <p>
+          <strong>Median Aggregation</strong> — The free API returns 3-hour intervals (8 readings/day).
+          Rather than picking a single midday reading or using the mean (sensitive to outliers like
+          early-morning lows), we compute the <strong>median temperature</strong> for a robust daily summary.
+        </p>
+        <br>
+        <p>
+          <strong>Mode-based Weather</strong> — The dominant weather condition is determined by frequency
+          analysis (mode) across all intervals. This gives the most representative condition rather
+          than an arbitrary single snapshot.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Built with TypeScript &middot; Node.js &middot; OpenWeatherMap API</p>
+    </footer>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/typescript.min.js"></script>
+  <script>
+    hljs.highlightAll();
+
+    // Render Task 1 output with colored tokens
+    const output = "Bar Foo 98 Foo Bar 94 Foo 92 91 FooBar 88 Foo 86 Bar Foo 82 Foo Bar Foo 77 76 FooBar 74 Foo Bar Foo 68 Foo Bar 64 Foo 62 FooBar 58 Foo 56 Bar Foo 52 Foo Bar 49 Foo 46 FooBar 44 Foo Bar Foo 38 Foo Bar 34 Foo 32 FooBar 28 Foo 26 Bar Foo 22 Foo Bar Foo 16 FooBar 14 Foo Bar Foo 8 Foo 4 1";
+    const container = document.getElementById("task1-output");
+    container.innerHTML = '<span class="output-label">$ npx tsx task1.ts</span>' +
+      output.split(" ").map(t => {
+        if (t === "FooBar") return `<span class="token token-foobar">${t}</span>`;
+        if (t === "Foo") return `<span class="token token-foo">${t}</span>`;
+        if (t === "Bar") return `<span class="token token-bar">${t}</span>`;
+        return `<span class="token token-num">${t}</span>`;
+      }).join(" ");
+  </script>
+</body>
+</html>
