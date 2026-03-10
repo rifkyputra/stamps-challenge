@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +22,11 @@
       --tag-foobar: #8957e5;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
@@ -64,8 +69,15 @@
       margin: 0.5rem 0.25rem 0;
     }
 
-    .badge-ts { background: #3178c6; color: #fff; }
-    .badge-node { background: #339933; color: #fff; }
+    .badge-ts {
+      background: #3178c6;
+      color: #fff;
+    }
+
+    .badge-node {
+      background: #339933;
+      color: #fff;
+    }
 
     /* Sections */
     .task {
@@ -106,7 +118,8 @@
       letter-spacing: 0.05em;
     }
 
-    .task p, .task li {
+    .task p,
+    .task li {
       color: var(--text-muted);
       font-size: 0.95rem;
     }
@@ -116,7 +129,9 @@
       margin-bottom: 0.5rem;
     }
 
-    .task li { margin-bottom: 0.3rem; }
+    .task li {
+      margin-bottom: 0.3rem;
+    }
 
     /* Code blocks */
     pre {
@@ -207,11 +222,33 @@
     }
 
     /* FooBar output tokens */
-    .token { display: inline-block; margin: 0.15rem; padding: 0.1rem 0.4rem; border-radius: 0.25rem; font-size: 0.8rem; }
-    .token-foo { background: var(--tag-foo); color: #fff; }
-    .token-bar { background: var(--tag-bar); color: #fff; }
-    .token-foobar { background: var(--tag-foobar); color: #fff; }
-    .token-num { background: var(--border); color: var(--text); }
+    .token {
+      display: inline-block;
+      margin: 0.15rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 0.25rem;
+      font-size: 0.8rem;
+    }
+
+    .token-foo {
+      background: var(--tag-foo);
+      color: #fff;
+    }
+
+    .token-bar {
+      background: var(--tag-bar);
+      color: #fff;
+    }
+
+    .token-foobar {
+      background: var(--tag-foobar);
+      color: #fff;
+    }
+
+    .token-num {
+      background: var(--border);
+      color: var(--text);
+    }
 
     /* Footer */
     footer {
@@ -225,17 +262,25 @@
 
     /* Responsive */
     @media (max-width: 640px) {
-      .container { padding: 1rem; }
-      .task { padding: 1.25rem; }
-      header h1 { font-size: 1.5rem; }
+      .container {
+        padding: 1rem;
+      }
+
+      .task {
+        padding: 1.25rem;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <header>
       <h1>Stamps Technical Challenge</h1>
-      <p>Senior Developer Assessment</p>
       <div>
         <span class="badge badge-ts">TypeScript</span>
         <span class="badge badge-node">Node.js</span>
@@ -245,7 +290,8 @@
     <!-- Task 1 -->
     <section class="task">
       <h2><span class="task-number">1</span> FooBar — Number Printer</h2>
-      <p>Print numbers 1–100 in reverse order: skip primes, replace divisible-by-3 with Foo, divisible-by-5 with Bar, both with FooBar.</p>
+      <p>Print numbers 1–100 in reverse order: skip primes, replace divisible-by-3 with Foo, divisible-by-5 with Bar,
+        both with FooBar.</p>
 
       <h3>Source Code</h3>
       <pre><code class="language-typescript">/*
@@ -453,11 +499,36 @@ main();</code></pre>
           </tr>
         </thead>
         <tbody>
-          <tr><td>Wed, Mar 11</td><td>28.3°C</td><td>72%</td><td>overcast clouds</td></tr>
-          <tr><td>Thu, Mar 12</td><td>28.9°C</td><td>63%</td><td>clear sky</td></tr>
-          <tr><td>Fri, Mar 13</td><td>29.0°C</td><td>56%</td><td>few clouds</td></tr>
-          <tr><td>Sat, Mar 14</td><td>27.4°C</td><td>78%</td><td>overcast clouds</td></tr>
-          <tr><td>Sun, Mar 15</td><td>27.8°C</td><td>69%</td><td>overcast clouds</td></tr>
+          <tr>
+            <td>Wed, Mar 11</td>
+            <td>28.3°C</td>
+            <td>72%</td>
+            <td>overcast clouds</td>
+          </tr>
+          <tr>
+            <td>Thu, Mar 12</td>
+            <td>28.9°C</td>
+            <td>63%</td>
+            <td>clear sky</td>
+          </tr>
+          <tr>
+            <td>Fri, Mar 13</td>
+            <td>29.0°C</td>
+            <td>56%</td>
+            <td>few clouds</td>
+          </tr>
+          <tr>
+            <td>Sat, Mar 14</td>
+            <td>27.4°C</td>
+            <td>78%</td>
+            <td>overcast clouds</td>
+          </tr>
+          <tr>
+            <td>Sun, Mar 15</td>
+            <td>27.8°C</td>
+            <td>69%</td>
+            <td>overcast clouds</td>
+          </tr>
         </tbody>
       </table>
 
@@ -499,4 +570,5 @@ main();</code></pre>
       }).join(" ");
   </script>
 </body>
+
 </html>
